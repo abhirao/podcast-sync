@@ -24,7 +24,7 @@ def create_or_get_session
     gets
     token = @session.get_access_token
     puts @session.serialize
-    File.open('saved_token.yaml', 'w') {|f| f.write(@session.serialize) }
+    File.open(SAVED_TOKEN, 'w') {|f| f.write(@session.serialize) }
   end
 end
 
