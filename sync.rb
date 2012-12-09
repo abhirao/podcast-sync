@@ -15,7 +15,7 @@ class Sync
     datastore= Storage.new
     avail = datastore.available_episodes
 
-    TapasService.feed_items(AppConfig.max_eps).each do |item|
+    TapasService.feed_items(AppConfig.max_eps.to_i).each do |item|
       if avail.include? "/#{item.name}.mp4"
         puts "Skipping #{item.name} because it's already available"
       else
