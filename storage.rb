@@ -29,7 +29,7 @@ class Storage
     session    
   end
 
-  def upload(client, item)
-    @client.put_file("/#{item.fetch(:name)}.mp4", local_file)
+  def upload(item)
+    @client.put_file("/#{item.name}.mp4", item.local_file)
   end
 end
