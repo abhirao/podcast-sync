@@ -23,9 +23,9 @@ class TapasService
       puts "Starting Download of #{uri.request_uri}..."
       req = Net::HTTP::Get.new uri.request_uri
       req.basic_auth AppConfig.tapas_acct, AppConfig.tapas_pwd
-      puts "Downloading #{@file_name}"
+      puts "Downloading #{item.local_file}"
       http.request req do |response|
-        open(item.local_file, 'wb') do |io|
+        File.open(item.local_file, 'wb') do |io|
           response.read_body do |chunk|
             io.write chunk
           end
