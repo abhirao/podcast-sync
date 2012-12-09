@@ -36,6 +36,6 @@ class TapasService
 
   private
   def self.local_file(file_name)
-    File.join('tmp', file_name + '.mp4')
+    File.join('/', 'tmp', file_name + '.mp4')
   end
 end
