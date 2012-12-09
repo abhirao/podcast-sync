@@ -4,7 +4,7 @@ class AppConfig
   def self.dropbox_key
     APP_CONFIG['dropbox_key']
   end
-  
+
   def self.dropbox_secret
     APP_CONFIG['dropbox_secret']
   end
