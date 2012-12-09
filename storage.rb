@@ -13,9 +13,7 @@ class Storage
   end
 
   def get_session
-    raise "Session needs to be created and saved in #{SAVED_TOKEN}. Run Storage.create_session locally to generate it" unless File.exists?(SAVED_TOKEN)
-    serialized_session = File.open(SAVED_TOKEN).read
-    session = DropboxSession.deserialize(serialized_session)
+    DropboxSession.deserialize(StringIO.new(AppConfig.dropbox_session))
   end
 
   def self.create_session
