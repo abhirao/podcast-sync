@@ -1,16 +1,15 @@
 require_relative 'app_config'
+require_relative 'feed_item'
 
 class TapasService
   FEED_URL = "https://rubytapas.dpdcart.com/feed"
-
-  Item = Struct.new(:name, :local_file, :url)
 
   def self.feed_items(max=5)
     content = ""
     open(FEED_URL, http_basic_authentication: [AppConfig.tapas_acct, AppConfig.tapas_pwd]) do |s| content = s.read end
     rss = RSS::Parser.parse(content, false)
     items = rss.channel.items.first(max).reverse.map{|i| {name: i.title, url: i.enclosure.url}}.map do |i| 
-      Item.new(i.fetch(:name), local_file(i.fetch(:name)), i.fetch(:url))
+      FeedItem.new(i.fetch(:name), local_file(i.fetch(:name)), i.fetch(:url))
     end
   end
 
@@ -23,7 +22,7 @@ class TapasService
       puts "Starting Download of #{uri.request_uri}..."
       req = Net::HTTP::Get.new uri.request_uri
       req.basic_auth AppConfig.tapas_acct, AppConfig.tapas_pwd
-      puts "Downloading #{item.local_file}"
+      puts "Downloading to #{item.local_file}"
       http.request req do |response|
         File.open(item.local_file, 'wb') do |io|
           response.read_body do |chunk|
