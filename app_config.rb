@@ -1,3 +1,5 @@
+require 'yaml'
+
 class AppConfig
   APP_CONFIG = YAML.load_file('config.yml') if File.exists? 'config.yml'
 

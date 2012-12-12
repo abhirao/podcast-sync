@@ -1,3 +1,5 @@
+require 'dropbox_sdk'
+
 require_relative 'app_config'
 
 class Storage
