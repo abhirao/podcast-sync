@@ -32,6 +32,6 @@ class Storage
   end
 
   def upload(item)
-    @client.put_file("/#{item.name}.mp4", File.open(item.local_file))
+    @client.put_file("/#{File.basename(item.local_file)}.mp4", File.open(item.local_file))
   end
 end
