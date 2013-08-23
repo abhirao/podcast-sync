@@ -1,4 +1,4 @@
-require_relative 'sync'
+require_relative 'lib/sync'
 
 desc 'Sync dropbox with podcast'
 task :sync do
