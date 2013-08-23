@@ -19,9 +19,9 @@ class Feeds
       puts "Starting Download of #{uri.request_uri}..."
       req = Net::HTTP::Get.new uri.request_uri
       req.basic_auth AppConfig.tapas_acct, AppConfig.tapas_pwd
-      puts "Downloading to #{item.local_file}"
+      puts "Downloading to #{item.tmp_loc}"
       http.request req do |response|
-        File.open(item.local_file, 'wb') do |io|
+        File.open(item.tmp_loc, 'wb') do |io|
           response.read_body do |chunk|
             io.write chunk
           end

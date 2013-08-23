@@ -11,7 +11,7 @@ class Storage
   end
 
   def available_episodes
-    avail = @client.metadata('/').fetch('contents', {}).map{|h| h.fetch('path')}
+    avail = @client.metadata('/').fetch('contents', {}).map{|h| h.fetch('path')}.map{|ep| File.basename(ep)}
   end
 
   def get_session
@@ -32,6 +32,6 @@ class Storage
   end
 
   def upload(item)
-    @client.put_file("/#{File.basename(item.local_file)}", File.open(item.local_file))
+    @client.put_file("/#{item.file_name}", File.open(item.tmp_loc))
   end
 end
