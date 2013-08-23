@@ -15,6 +15,10 @@ class TapasService
 
   private
   def self.local_file(file_name)
-    File.join('/', 'tmp', file_name + '.mp4')
+    File.join('/', 'tmp', safe_filename(file_name) + '.mp4')
+  end
+  
+  def self.safe_filename(str)
+    str.gsub(/\//, '_')
   end
 end

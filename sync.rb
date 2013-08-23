@@ -8,7 +8,7 @@ class Sync
     avail = datastore.available_episodes
 
     Feeds.feed_items(AppConfig.max_eps.to_i).each do |item|
-      if avail.include? "/#{item.name}.mp4"
+      if avail.include? File.basename(item.local_file)
         puts "Skipping #{item.name} because it's already available"
       else
         Feeds.download(item)
