@@ -5,7 +5,7 @@ require_relative 'storage'
 class Sync
   def self.run
     datastore= Storage.new
-    avail = datastore.available_episodes
+    avail = datastore.available_episodes.map{|ep| File.basename(ep)}
 
     Feeds.feed_items(AppConfig.max_eps.to_i).each do |item|
       if avail.include? File.basename(item.local_file)
