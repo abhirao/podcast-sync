@@ -11,7 +11,7 @@ class Storage
   end
 
   def available_episodes
-    avail = @client.metadata('/').fetch('contents', {}).map{|h| h.fetch('path')}.map{|ep| File.basename(ep)}
+    @client.metadata('/').fetch('contents', {}).map{|h| h.fetch('path')}.map{|ep| File.basename(ep)}
   end
 
   def get_session
